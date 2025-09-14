@@ -1,6 +1,6 @@
 # initiate-mern
 
-![npm version](https://img.shields.io/npm/v/initiate-mern-cli?color=blue)  
+![npm version](https://img.shields.io/npm/v/initiate-mern?color=blue)  
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 Simple MERN scaffolder to quickly bootstrap a full-stack MongoDB, Express, React, and Node.js project.
