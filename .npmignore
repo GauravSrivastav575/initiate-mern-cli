@@ -1,0 +1,16 @@
+# Node modules
+node_modules/
+
+# Local env / secrets
+.env
+.env.local
+
+# Logs
+logs/
+*.log
+
+# VS Code / IDE
+.vscode/
+
+# Git metadata (optional, npm ignores .git by default)
+.git/
