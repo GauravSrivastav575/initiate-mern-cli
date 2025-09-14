@@ -1,27 +1,17 @@
-# Node modules
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# Logs
 logs/
 *.log
 pids/
 *.pid
 *.seed
 *.pid.lock
-
-# OS files
 .DS_Store
 Thumbs.db
-
-# VS Code
 .vscode/
-
-# Environment variables
 .env
-
-# Build folders (if any)
 dist/
 build/
+package-lock.json

@@ -12,7 +12,6 @@ const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 async function main() {
   console.log(chalk.green("create-mern — MERN starter generator\n"));
 
-  // ===== Prompt user =====
   const answers = await inquirer.prompt([
     {
       type: "input",
@@ -40,40 +39,34 @@ async function main() {
     },
   ]);
 
-  // ===== Paths =====
   const projectPath = path.join(process.cwd(), answers.projectName);
   const backendPath = path.join(projectPath, "backend");
   const frontendPath = path.join(projectPath, "frontend");
 
   fs.ensureDirSync(projectPath);
 
-  // ===== Backend =====
   console.log(chalk.blue("\nSetting up backend..."));
 
   await fs.copy(path.join(__dirname, "../templates/backend"), backendPath);
 
-  // Create backend .env with FRONTEND_URL
+  // Create backend .env
   const backendEnv = `PORT=${answers.backendPort}
 MONGO_URI=mongodb://127.0.0.1:27017/${answers.dbName}
 FRONTEND_URL=http://localhost:${answers.frontendPort}
 `;
   fs.writeFileSync(path.join(backendPath, ".env"), backendEnv);
 
-  // Init npm + install backend dependencies
+  // Init npm
   execSync("npm init -y", { cwd: backendPath, stdio: "inherit" });
-  // After npm init -y
+
+  // Add type and scripts to package.json
   const backendPackagePath = path.join(backendPath, "package.json");
   const backendPackage = JSON.parse(fs.readFileSync(backendPackagePath, "utf-8"));
-
-  // Add type
   backendPackage.type = "module";
-  // Add scripts
   backendPackage.scripts = {
     start: "node server.js",
     dev: "nodemon server.js"
   };
-
-  // Write back
   fs.writeFileSync(
     backendPackagePath,
     JSON.stringify(backendPackage, null, 2)
@@ -90,10 +83,8 @@ FRONTEND_URL=http://localhost:${answers.frontendPort}
 
   console.log(chalk.green("Backend ready."));
 
-  // ===== Frontend =====
+  // Frontend setup
   console.log(chalk.blue("\nSetting up frontend (Vite + React)..."));
-
-  // Create vite react project
   try {
     execSync(`npm create vite@latest frontend -- --template react`, {
       cwd: projectPath,
@@ -105,7 +96,7 @@ FRONTEND_URL=http://localhost:${answers.frontendPort}
     console.error(err.stderr.toString());
   }
 
-  // Copy custom frontend template (src)
+  // Custom frontend template
   await fs.copy(
     path.join(__dirname, "../templates/frontend/src"),
     path.join(frontendPath, "src"),
@@ -122,10 +113,8 @@ FRONTEND_URL=http://localhost:${answers.frontendPort}
     cwd: frontendPath,
     stdio: "inherit",
   });
-  console.log(chalk.green("✅ Frontend ready.\n"));
-
-  // Next Steps:
-  console.log(chalk.green(`\n🎉 All done!`));
+  console.log(chalk.green("Frontend ready.\n"));
+  console.log(chalk.green(`\nAll done!`));
   console.log(chalk.yellow(`Project path: ${projectPath}`));
   console.log(chalk.cyan("Next steps:"));
   console.log(
