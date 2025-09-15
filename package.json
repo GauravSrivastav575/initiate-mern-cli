@@ -1,6 +1,6 @@
 {
   "name": "initiate-mern",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple MERN scaffolder",
   "bin": {
     "initiate-mern": "./bin/index.js"

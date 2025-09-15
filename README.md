@@ -9,7 +9,9 @@ Simple MERN scaffolder to quickly bootstrap a full-stack MongoDB, Express, React
 
 - Generates a ready-to-run MERN stack project
 - Backend: Express, MongoDB (Mongoose), CORS, dotenv, cookie-parser, method-override
+- Backend includes scaffolded models and utils directories (e.g., models/User.js, utils/logger.js)
 - Frontend: React (Vite), React Router, Axios
+- Frontend comes with Tailwind CSS preconfigured (tailwind.config.js, postcss.config.js, and ready-to-use styles)
 - Sample API route and page integration
 - Environment variable templates for both backend and frontend
 
@@ -31,7 +33,7 @@ npm install -g initiate-mern-cli
 
 ### 2. Usage
 
-Run the CLI to scaffold a new MERN project:
+Directly run the CLI to initiate a new MERN project:
 
 ```sh
 npx initiate-mern
@@ -61,6 +63,8 @@ cd <your-project-name>/frontend
 npm run dev
 ```
 
+Note: Tailwind CSS is preconfigured in the frontend. See tailwind.config.js and postcss.config.js in the frontend root.
+
 ### 4. Environment Variables
 
 - Copy `.env.example` to `.env` in both `backend` and `frontend/src` folders and adjust as needed.
@@ -77,6 +81,10 @@ backend/
     sampleController.js
   middlewares/
     errorHandler.js
+  models/
+    User.js
+  utils/
+    logger.js
   public/
     index.html
   routes/
@@ -91,6 +99,8 @@ frontend/
       HomePage.jsx
     services/
       api.js
+  postcss.config.js
+  tailwind.config.js
 ```
 
 ## License

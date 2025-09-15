@@ -102,6 +102,14 @@ FRONTEND_URL=http://localhost:${answers.frontendPort}
     path.join(frontendPath, "src"),
     { overwrite: true }
   );
+  await fs.copy(
+    path.join(__dirname, "../templates/frontend/tailwind.config.js"),
+    path.join(frontendPath, "tailwind.config.js")
+  );
+  await fs.copy(
+    path.join(__dirname, "../templates/frontend/postcss.config.js"),
+    path.join(frontendPath, "postcss.config.js")
+  );
 
   // Create frontend .env
   const frontendEnv = `VITE_API_BASE_URL=http://localhost:${answers.backendPort}/api
@@ -110,6 +118,10 @@ FRONTEND_URL=http://localhost:${answers.frontendPort}
 
   // Install frontend dependencies
   execSync("npm install axios react-router-dom", {
+    cwd: frontendPath,
+    stdio: "inherit",
+  });
+  execSync("npm install -D tailwindcss @tailwindcss/postcss", {
     cwd: frontendPath,
     stdio: "inherit",
   });
